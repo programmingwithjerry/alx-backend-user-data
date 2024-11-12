@@ -11,7 +11,8 @@ class Auth:
     """ Handles authentication methods """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Determines if authentication is needed for specific API routes """
+        """ Determines if authentication is needed for
+            specific API routes """
         if path is None or not excluded_paths:
             return True
         for i in excluded_paths:
@@ -22,7 +23,8 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """ Verifies the presence of the Authorization header in the request 
+        """ Verifies the presence of the Authorization
+            header in the request 
         and checks if it contains a value """
         if request is None or "Authorization" not in request.headers:
             return None
