@@ -55,6 +55,28 @@ class BasicAuth(Auth):
             return (res[0], res[1])
         return (None, None)
 
+    def user_object_from_credentials(self,
+                                 user_email: str,
+                                 user_pwd: str) -> TypeVar('User'):
+        """ Retrieves a User instance matching the
+            given email and password """
+        # Check if the email is provided and is a string
+        if user_email is None or not isinstance(user_email, str):
+            return None
+        # Check if the password is provided and is a string
+        if user_pwd is None or not isinstance(user_pwd, str):
+            return None
+        try:
+            # Search for users with the matching email
+            users = User.search({'email': user_email})
+        except Exception:
+            return None
+        # Verify if any user matches the given password
+        for user in users:
+            if user.is_valid_password(user_pwd):
+                return user
+        return None
+
     def current_user(self, request=None) -> TypeVar('User'):
         """
         Overrides the Auth class method to fetch the User
