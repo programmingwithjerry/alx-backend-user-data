@@ -6,6 +6,7 @@ SessionAuth
 import uuid
 from api.v1.auth.auth import Auth
 
+
 class SessionAuth(Auth):
     """Session-based Authentication class."""
 
@@ -41,4 +42,3 @@ class SessionAuth(Auth):
 
         # Retrieve the user ID associated with the session ID using .get()
         return self.user_id_by_session_id.get(session_id)
-
