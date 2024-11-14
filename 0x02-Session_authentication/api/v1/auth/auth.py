@@ -34,3 +34,11 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """ Placeholder method for obtaining the current user """
         return None
+
+    def session_cookie(self, request=None):
+        """
+        This returns a cookie value from a request
+        """
+        if request:
+            session_name = getenv("SESSION_NAME")
+            return request.cookie.get(session_name, None)
