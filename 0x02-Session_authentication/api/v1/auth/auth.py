@@ -3,8 +3,11 @@
 Module for API authentication
 """
 
+from tabnanny import check
 from flask import request
-from typing import List, TypeVar
+from typing import TypeVar, List
+from os import getenv
+User = TypeVar('User')
 
 
 class Auth:
