@@ -30,3 +30,15 @@ class SessionAuth(Auth):
 
         return session_id
 
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """Retrieves a user ID based on a session ID.
+           Return: The user ID if found, or None if session_id
+           is invalid or not found.
+        """
+        # Check for valid session_id
+        if session_id is None or not isinstance(session_id, str):
+            return None
+
+        # Retrieve the user ID associated with the session ID using .get()
+        return self.user_id_by_session_id.get(session_id)
+
