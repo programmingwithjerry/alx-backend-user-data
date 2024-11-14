@@ -14,10 +14,6 @@ class SessionAuth(Auth):
 
     def create_session(self, user_id: str = None) -> str:
         """Creates a session ID for a given user_id.
-
-        Args:
-            user_id (str): The user ID to create a session for.
-
         Return:
             The session ID if successful, or None if
             the user_id is invalid.
