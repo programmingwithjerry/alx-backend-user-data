@@ -54,20 +54,26 @@ def before_request():
     Executes prior to each request to handle authentication checks
     """
     # Define a list of routes that do not require authentication
-    open_routes = ['/api/v1/status/',
-                   '/api/v1/unauthorized/', '/api/v1/forbidden/',
-                   '/api/v1/auth_session/login/']
+    open_routes = [
+        '/api/v1/status/',
+        '/api/v1/unauthorized/',
+        '/api/v1/forbidden/',
+        '/api/v1/auth_session/login/'
+    ]
 
     # Check if the current request path requires authentication
     if auth and auth.require_auth(request.path, open_routes):
-        """If no Authorization header is present, respond with
-        a 401 Unauthorized"""
+        """If no Authorization header is present,
+           respond with a 401 Unauthorized"""
         if not auth.authorization_header(request):
             abort(401)
         """If the header is present but session cookie is missing,
-           respond with a 401"""
-        if (auth.authorization_header(request) and
-            not auth.session_cookie(request)):
+           respond with a 401
+        """
+        if (
+            auth.authorization_header(request)
+            and not auth.session_cookie(request)
+        ):
             abort(401)
         # Set the current user for the request if authenticated
         request.current_user = auth.current_user(request)
